@@ -91,6 +91,39 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	
+
+	// index 변수 추가
+	int index = 0;
+
+	ListNode* cur;
+	
+	// 비어있는 연결 리스트라면 -1 반환
+	if (ll == NULL)
+		return -1;
+	
+	// 현재 위치 저장할 cur
+	cur = ll->head;
+
+	// 다음 연결 리스트가 없을때까지 반복
+	while(cur != NULL){
+		// 만약 이미 있는 data 값을 추가하려고 하면 -1 반환
+		if (cur->item == item) return -1;
+		// 이미 정렬된 연결 리스트이기에, 연결 리스트의 data와 추가할 data를 비교 후 
+		// 입력할 데이터보다 연결 리스트에 있는 data값이 크다면, 그 앞에 추가(insertNode) 후 index 반환
+		else if (cur->item > item) {
+			insertNode(ll, index, item);
+			return index;
+		}
+		// 검색하지 못했으면 다음 연결 리스트로 이동 및 index에 1 더하기
+		cur = cur->next;
+		index ++;
+	}
+	// 연결 리스트에 있는 값들 중 가장 큰 값이라면 위의 while문에서 검색 불가하기에
+	// 가장 마지막에 넣어주고, index 반환
+	insertNode(ll, index, item);
+	return index ;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
