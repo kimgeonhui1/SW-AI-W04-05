@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 2 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -104,7 +105,21 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+
+	if (ll1->size == 0 || ll2->size == 0) return;
+
+	int idx = 1;
+
+	while (idx <= ll1->size && ll2->head != NULL)
+	{
+		insertNode(ll1, idx, ll2->head->item);
+		removeNode(ll2, 0);
+
+		idx += 2; 
+	}
 }
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 
