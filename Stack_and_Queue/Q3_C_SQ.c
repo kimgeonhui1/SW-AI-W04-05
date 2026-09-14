@@ -104,6 +104,37 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+	if (s->ll.head == NULL || s->ll.size % 2 == 1) return 0;
+
+	int size = s->ll.size;
+	int* list = malloc(sizeof(int) * size);
+	int j = 0;
+
+	for (int i = 0; i < (size / 2); i++) {
+		int a = pop(s);
+		int b = pop(s);
+
+		if (abs(a - b) == 1) {
+			list[j] = a;
+			j++;
+			list[j] = b;
+			j++;
+		}
+		else {
+			for (int i = j - 1; i >= 0; i--) {
+				push(s, list[i]);
+			}
+			free(list);
+			return 0;
+		}
+	}
+
+	for (int i = j - 1; i >= 0; i--) {
+		push(s, list[i]);
+	}
+	free(list);
+	return 1;
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -111,7 +111,26 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
+	int size = s->ll.size;
+
+	if (s->ll.size == 0) return;
+
+	int * list = malloc(sizeof(int) * size);
+
 /* add your code here */
+	for (int i = 0; i < size; i++) {
+		list[i] = pop(s);
+		if (list[i] == value) {
+			push(s, list[i]);
+			free(list);
+			return;
+		}
+	}
+	for (int i = size-1; i >= 0; i--) {
+		push(s, list[i]);
+	}
+	free(list);
+	return;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
