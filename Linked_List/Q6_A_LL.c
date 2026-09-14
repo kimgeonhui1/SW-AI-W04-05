@@ -88,7 +88,45 @@ int main()
 
 int moveMaxToFront(ListNode **ptrHead)
 {
-    /* add your code here */
+	/* 리스트가 비어 있거나 노드가 1개뿐인 경우 */
+	if (ptrHead == NULL || *ptrHead == NULL) return 0;
+
+	// 전 노드를 가리키는 prev
+	ListNode* prev = *ptrHead;
+	// 현재 노드를 가리키는 cur
+	ListNode* cur = (*ptrHead)->next;
+
+	// 최대값 노드 maxNode
+	ListNode* maxNode = *ptrHead;
+	// 최대값 전 노드 preMax
+	ListNode* preMax = NULL;
+
+	// 다음 노드가 없을때 까지(순회가 완료될 때까지)
+	while (cur != NULL) {
+		// 다음 노드의 값이 현재 최댓값보다 높다면 바꾸기
+		if (cur->item > maxNode->item) {
+			maxNode = cur;
+			preMax = prev;
+		}
+		// 한 번 완료되면 다음 연결 리스트로
+		prev = cur;
+		cur = cur->next;
+	}
+
+	// 첫번째 노드가 최대값일 경우
+	if (preMax == NULL)
+		return 0;
+
+	// 끊기지 않게 최대값 전 노드와 최대값 다음 노드를 연결
+	preMax->next = maxNode->next;
+	 
+	// 최대값 처음으로 이동
+	maxNode->next = *ptrHead;
+	*ptrHead = maxNode;
+
+	return 0;
+	
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

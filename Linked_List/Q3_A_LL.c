@@ -87,6 +87,29 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+
+	ListNode *cur= ll->head;
+	ListNode* temp;
+
+	if (ll == NULL)
+		return;
+	
+	int index = 0;
+	int cnt = ll->size;
+
+	for (int i=0;i<cnt;i++){
+		temp = cur->next;
+		if (cur->item % 2 == 1) {
+			insertNode(ll, ll->size, cur->item);
+			removeNode(ll, index);
+
+		}
+		else index++;
+
+		cur = temp;
+
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +209,7 @@ int removeNode(LinkedList *ll, int index){
 	// Highest index we can remove is size-1
 	if (ll == NULL || index < 0 || index >= ll->size)
 		return -1;
-
+	 
 	// If removing first node, need to update head pointer
 	if (index == 0){
 		cur = ll->head->next;
